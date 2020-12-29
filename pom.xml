@@ -11,7 +11,8 @@
     <description>Demo project for Spring Cloud</description>
 
     <modules>
-        <module>payment8001</module>
+        <module>cloud-provider-payment8001</module>
+        <module>cloud-consumer-order80</module>
     </modules>
 
     <properties>

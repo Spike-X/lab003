@@ -5,7 +5,7 @@ spring:
   profiles:
     active: dev
   application:
-    name: payment-service
+    name: cloud-payment-service
   datasource:
     druid:
       driver-class-name: com.mysql.cj.jdbc.Driver
