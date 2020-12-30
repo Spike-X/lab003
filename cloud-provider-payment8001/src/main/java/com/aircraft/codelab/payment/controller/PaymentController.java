@@ -1,4 +1,4 @@
-package com.aircraft.codelab.controller;
+package com.aircraft.codelab.payment.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RestController;
