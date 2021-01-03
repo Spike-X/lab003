@@ -20,28 +20,8 @@ public class RedisServiceImpl implements RedisService {
     private RedisTemplate<String, Object> redisTemplate;
 
     @Override
-    public void set(String key, Object value, long time) {
-        redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
-    }
-
-    @Override
-    public void set(String key, Object value) {
-        redisTemplate.opsForValue().set(key, value);
-    }
-
-    @Override
-    public Object get(String key) {
-        return redisTemplate.opsForValue().get(key);
-    }
-
-    @Override
-    public Boolean del(String key) {
-        return redisTemplate.delete(key);
-    }
-
-    @Override
-    public Long del(List<String> keys) {
-        return redisTemplate.delete(keys);
+    public Boolean hasKey(String key) {
+        return redisTemplate.hasKey(key);
     }
 
     @Override
@@ -55,19 +35,30 @@ public class RedisServiceImpl implements RedisService {
     }
 
     @Override
-    public Boolean hasKey(String key) {
-        return redisTemplate.hasKey(key);
+    public Boolean delete(String key) {
+        return redisTemplate.delete(key);
     }
 
     @Override
-    public Long incr(String key, long delta) {
-        return redisTemplate.opsForValue().increment(key, delta);
+    public Long delete(List<String> keys) {
+        return redisTemplate.delete(keys);
     }
 
     @Override
-    public Long decr(String key, long delta) {
-        return redisTemplate.opsForValue().increment(key, -delta);
+    public void set(String key, Object value) {
+        redisTemplate.opsForValue().set(key, value);
     }
+
+    @Override
+    public void set(String key, Object value, long time) {
+        redisTemplate.opsForValue().set(key, value, time, TimeUnit.SECONDS);
+    }
+
+    @Override
+    public Object get(String key) {
+        return redisTemplate.opsForValue().get(key);
+    }
+
 
     @Override
     public Object hGet(String key, String hashKey) {

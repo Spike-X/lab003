@@ -12,58 +12,71 @@ import java.util.Set;
  */
 public interface RedisService {
     /**
-     * 保存属性
+     * 判断key是否存在
      *
-     * @param key   key
-     * @param value v
-     * @param time  t
-     */
-    void set(String key, Object value, long time);
-
-    /**
-     * 保存属性
-     */
-    void set(String key, Object value);
-
-    /**
-     * 获取属性
-     */
-    Object get(String key);
-
-    /**
-     * 删除属性
-     */
-    Boolean del(String key);
-
-    /**
-     * 批量删除属性
-     */
-    Long del(List<String> keys);
-
-    /**
-     * 设置过期时间
-     */
-    Boolean expire(String key, long time);
-
-    /**
-     * 获取过期时间
-     */
-    Long getExpire(String key);
-
-    /**
-     * 判断是否有该属性
+     * @param key 键
+     * @return Boolean
      */
     Boolean hasKey(String key);
 
     /**
-     * 按delta递增
+     * 设置key过期时间
+     *
+     * @param key  键
+     * @param time 过期时间
+     * @return Boolean
      */
-    Long incr(String key, long delta);
+    Boolean expire(String key, long time);
 
     /**
-     * 按delta递减
+     * 获取key过期时间
+     *
+     * @param key 键
+     * @return Long
      */
-    Long decr(String key, long delta);
+    Long getExpire(String key);
+
+    /**
+     * 删除指定Key
+     *
+     * @param key 键
+     * @return Boolean
+     */
+    Boolean delete(String key);
+
+    /**
+     * 批量删除指定Key
+     *
+     * @param keys 键
+     * @return Long
+     */
+    Long delete(List<String> keys);
+
+    /**
+     * 添加String类型 K,V
+     *
+     * @param key   键
+     * @param value 值
+     */
+    void set(String key, Object value);
+
+    /**
+     * 添加String类型 K,V
+     *
+     * @param key   键
+     * @param value 值
+     * @param time  过期时间(秒)
+     */
+    void set(String key, Object value, long time);
+
+    /**
+     * 获取String类型 K,V
+     *
+     * @param key 键
+     * @return Object
+     */
+    Object get(String key);
+
 
     /**
      * 获取Hash结构中的属性
@@ -115,6 +128,7 @@ public interface RedisService {
      */
     Long hDecr(String key, String hashKey, Long delta);
 
+
     /**
      * 获取Set结构
      */
@@ -144,6 +158,7 @@ public interface RedisService {
      * 删除Set结构中的属性
      */
     Long sRemove(String key, Object... values);
+
 
     /**
      * 获取List结构中的属性
