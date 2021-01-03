@@ -1,6 +1,6 @@
 package com.aircraft.codelab.core.exception;
 
-import com.aircraft.codelab.core.common.CommonResult;
+import com.aircraft.codelab.core.entities.CommonResult;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;

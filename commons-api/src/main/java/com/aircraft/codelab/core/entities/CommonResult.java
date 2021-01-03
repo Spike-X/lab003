@@ -1,9 +1,7 @@
-package com.aircraft.codelab.core.common;
+package com.aircraft.codelab.core.entities;
 
 import com.aircraft.codelab.core.enums.ResultCode;
 import com.aircraft.codelab.core.service.IReturnCode;
-
-import java.io.Serializable;
 
 /**
  * 2020-11-01
@@ -12,10 +10,7 @@ import java.io.Serializable;
  * @author tao.zhang
  * @since 1.0
  */
-public class CommonResult<T> implements Serializable {
-
-    private static final long serialVersionUID = 1L;
-
+public class CommonResult<T> {
     /**
      * 状态码
      */
@@ -43,6 +38,10 @@ public class CommonResult<T> implements Serializable {
 
     public static <T> CommonResult<T> success(String message) {
         return success(message, null);
+    }
+
+    public static <T> CommonResult<T> success(T data) {
+        return success(ResultCode.SUCCESS.getMessage(), data);
     }
 
     public static <T> CommonResult<T> success(String message, T data) {
