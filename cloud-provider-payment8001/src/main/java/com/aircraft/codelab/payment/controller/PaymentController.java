@@ -32,8 +32,8 @@ public class PaymentController {
         info.put("name", "galaxy");
         info.put("age", "70");
         info.put("id", parentId);
-        redisService.hSetAll("test:map:4",info);
-        Map<Object, Object> map = redisService.hGetAll("test:map:4");
+        redisService.hSetAll("test:map:5",info);
+        Map<Object, Object> map = redisService.hGetAll("test:map:5");
         return CommonResult.success(ResultCode.SUCCESS.getMessage(), map);
     }
 }
