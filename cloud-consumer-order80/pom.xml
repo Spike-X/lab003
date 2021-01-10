@@ -12,9 +12,18 @@
     <artifactId>cloud-consumer-order80</artifactId>
 
     <dependencies>
+        <!-- maven modules -->
         <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
+            <groupId>com.aircraft.codelab</groupId>
+            <artifactId>commons-api</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+        <!-- maven modules -->
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 
