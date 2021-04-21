@@ -1,2 +1,2 @@
 org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
-  com.aircraft.codelab.core.config.RedisConfig
+com.aircraft.codelab.core.config.RedisConfig

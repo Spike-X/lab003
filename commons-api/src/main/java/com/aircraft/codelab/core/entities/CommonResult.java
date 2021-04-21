@@ -32,6 +32,9 @@ public class CommonResult<T> {
         this.data = data;
     }
 
+    public CommonResult() {
+    }
+
     public static <T> CommonResult<T> success() {
         return success(ResultCode.SUCCESS.getMessage(), null);
     }
