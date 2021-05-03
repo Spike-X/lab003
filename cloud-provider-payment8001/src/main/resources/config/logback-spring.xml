@@ -51,16 +51,16 @@
     <!-- 测试环境+开发环境. 多个使用逗号隔开 -->
 
     <!-- 开发环境:打印到控制台 -->
-    <springProfile name="dev,test">
-        <logger name="com.aircraft.codelab" level="debug"/>
+    <springProfile name="dev">
+        <logger name="com.aircraft.codelab.payment" level="debug"/>
 
         <root level="info">
             <appender-ref ref="STDOUT"/>
         </root>
     </springProfile>
     <!-- 生产环境:输出到文件 -->
-    <springProfile name="prod">
-        <logger name="com.aircraft.codelab" level="info"/>
+    <springProfile name="test,prod">
+        <logger name="com.aircraft.codelab.payment" level="info"/>
 
         <root level="info">
             <appender-ref ref="STDOUT"/>

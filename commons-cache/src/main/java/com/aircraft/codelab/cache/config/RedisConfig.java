@@ -1,7 +1,7 @@
-package com.aircraft.codelab.core.config;
+package com.aircraft.codelab.cache.config;
 
-import com.aircraft.codelab.core.service.RedisService;
-import com.aircraft.codelab.core.service.impl.RedisServiceImpl;
+import com.aircraft.codelab.cache.service.RedisService;
+import com.aircraft.codelab.cache.service.impl.RedisServiceImpl;
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.fasterxml.jackson.annotation.PropertyAccessor;

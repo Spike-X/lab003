@@ -18,8 +18,16 @@
             <artifactId>commons-api</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.aircraft.codelab</groupId>
+            <artifactId>commons-cache</artifactId>
+            <version>${project.version}</version>
+        </dependency>
         <!-- maven modules -->
-
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+        </dependency>
         <dependency>
             <groupId>mysql</groupId>
             <artifactId>mysql-connector-java</artifactId>
