@@ -8,6 +8,8 @@ import com.aircraft.codelab.core.enums.ResultCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -28,37 +30,56 @@ public class PaymentController {
     @Resource
     private RedisService redisService;
 
-    @Resource
-    private ObjectMapper objectMapper;
-
-    @GetMapping("/redis")
+    @GetMapping(value = "/redis", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResult<Map<Object, Object>> helloRedis(@RequestParam(defaultValue = "0", name = "id") Long parentId) {
         log.debug("redis test");
         HashMap<String, Object> info = new HashMap<>(8);
         info.put("name", "galaxy");
         info.put("age", "70");
         info.put("id", parentId);
-        redisService.hSetAll("test:map:5", info);
-        Map<Object, Object> map = redisService.hGetAll("test:map:5");
+        // hash方式存储
+        redisService.hSetAll("test:map:2", info);
+        Map<Object, Object> map = redisService.hGetAll("test:map:2");
+        // json方式存储
+//        redisService.set("test:map:3",info);
         return CommonResult.success(ResultCode.SUCCESS.getMessage(), map);
     }
 
-    @PostMapping(value = "/payment/create")
-    public CommonResult<String> create(@RequestBody Payment payment) throws JsonProcessingException {
+    @PostMapping(value = "/payment/create", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResult<String> create(@RequestBody Payment payment) {
         log.debug("/payment/create");
-        String valueAsString = objectMapper.writeValueAsString(payment);
         String s1 = DateUtil.format(LocalDateTime.now(), "yyyyMMddHHmmss");
-        redisService.set(s1, valueAsString);
+        // 直接存贮
+//        redisService.set(s1, payment);
+        // 转json存储
+        ObjectMapper objectMapper = new ObjectMapper();
+        String s = StringUtils.EMPTY;
+        try {
+            s = objectMapper.writeValueAsString(payment);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        redisService.set(s1, s);
         return CommonResult.success(ResultCode.SUCCESS.getMessage());
     }
 
-    @GetMapping(value = "/payment/get/{id}")
-    public CommonResult<Object> getPaymentById(@PathVariable("id") Long id) {
+    @GetMapping(value = "/payment/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public CommonResult<Payment> getPaymentById(@PathVariable("id") Long id) {
         log.debug("/payment/get");
         Object o = redisService.get(String.valueOf(id));
-
-        if (o != null) {
-            return CommonResult.success(ResultCode.SUCCESS.getMessage(), o);
+        // 强转(json格式)
+//        Payment payment = (Payment) o;
+        // json转对象
+        ObjectMapper objectMapper = new ObjectMapper();
+        Payment payment = null;
+        try {
+            payment = objectMapper.readValue(o.toString(), Payment.class);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+        log.debug("payment:{}", payment);
+        if (payment != null) {
+            return CommonResult.success(ResultCode.SUCCESS.getMessage(), payment);
         } else {
             return CommonResult.failed("查找订单失败");
         }

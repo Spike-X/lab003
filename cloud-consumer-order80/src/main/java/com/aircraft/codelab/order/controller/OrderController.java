@@ -3,6 +3,7 @@ package com.aircraft.codelab.order.controller;
 import com.aircraft.codelab.core.entities.CommonResult;
 import com.aircraft.codelab.core.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,13 +25,13 @@ public class OrderController {
     @Resource
     private RestTemplate restTemplate;
 
-    @GetMapping("/consumer/payment/create")
+    @GetMapping(value = "/consumer/payment/create", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResult<Payment> create(Payment payment) {
         log.debug("/consumer/payment/create");
         return restTemplate.postForObject(PAYMENT_URL + "/payment/create", payment, CommonResult.class);
     }
 
-    @GetMapping("/consumer/payment/get/{id}")
+    @GetMapping(value = "/consumer/payment/get/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
         log.debug("/consumer/payment/get");
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
