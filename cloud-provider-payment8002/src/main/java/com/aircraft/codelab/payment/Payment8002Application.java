@@ -2,21 +2,18 @@ package com.aircraft.codelab.payment;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
 /**
- * 2020-12-27
- * 启动类
+ * 2021-07-25
  *
  * @author tao.zhang
  * @since 1.0
  */
 @SpringBootApplication
 @EnableEurekaClient
-@EnableDiscoveryClient
-public class Payment8001Application {
+public class Payment8002Application {
     public static void main(String[] args) {
-        SpringApplication.run(Payment8001Application.class, args);
+        SpringApplication.run(Payment8002Application.class, args);
     }
 }
