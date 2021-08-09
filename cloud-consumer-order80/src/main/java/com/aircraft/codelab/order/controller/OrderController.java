@@ -4,6 +4,7 @@ import com.aircraft.codelab.core.entities.CommonResult;
 import com.aircraft.codelab.core.entities.Payment;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,5 +38,15 @@ public class OrderController {
     public CommonResult<Payment> getPayment(@PathVariable("id") Long id) {
         log.debug("/consumer/payment/get");
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+    }
+
+    @GetMapping("/consumer/payment/getForEntity/{id}")
+    public CommonResult<Payment> getPayment2(@PathVariable("id") Long id) {
+        ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
+        if (entity.getStatusCode().is2xxSuccessful()) {
+            return entity.getBody();
+        } else {
+            return CommonResult.failed();
+        }
     }
 }
