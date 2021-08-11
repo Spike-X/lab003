@@ -40,7 +40,7 @@ public class OrderController {
         return restTemplate.getForObject(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
     }
 
-    @GetMapping("/consumer/payment/getForEntity/{id}")
+    @GetMapping(value = "/consumer/payment/getForEntity/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
     public CommonResult<Payment> getPayment2(@PathVariable("id") Long id) {
         ResponseEntity<CommonResult> entity = restTemplate.getForEntity(PAYMENT_URL + "/payment/get/" + id, CommonResult.class);
         if (entity.getStatusCode().is2xxSuccessful()) {
