@@ -20,6 +20,7 @@
         <module>cloud-provider-payment8002</module>
         <module>cloud-provider-payment8004</module>
         <module>cloud-consumer-order81</module>
+        <module>cloud-consumer-feign-order80</module>
     </modules>
 
     <properties>
