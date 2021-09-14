@@ -1,0 +1,24 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/Spike-X/springcloud-config.git
+          username: Spike-X
+          password: leyankan4jZT
+          #搜索目录
+          search-paths:
+            - springcloud-config
+          default-label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
