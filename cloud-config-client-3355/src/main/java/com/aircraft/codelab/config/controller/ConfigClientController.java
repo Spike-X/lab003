@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 public class ConfigClientController {
-//    @Value("${config.info}")
+    @Value("${config.info}")
     private String configInfo;
 
     @GetMapping(value = "/configInfo", produces = MediaType.APPLICATION_JSON_VALUE)

@@ -7,13 +7,16 @@ spring:
   cloud:
     config:
       server:
+        #localhost:3344/master/config-dev.yml
         git:
-          uri: https://github.com/Spike-X/springcloud-config.git
-          username: Spike-X
+          uri: https://gitee.com/spikex/springcloud-config.git
+          username: zt_wmail500@163.com
           password: leyankan4jZT
           #搜索目录
           search-paths:
-            - springcloud-config
+            - lab1
+            - lab2
+          basedir: D:\lab003\config-center
           default-label: master
 
 eureka:
