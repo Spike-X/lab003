@@ -1,0 +1,27 @@
+server:
+  port: 3344
+
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        #localhost:3344/master/config-dev.yml
+        git:
+          uri: https://gitee.com/spikex/springcloud-config.git
+          username: zt_wmail500@163.com
+          password: leyankan4jZT
+          #搜索目录
+          search-paths:
+            - lab1
+            - lab2
+          basedir: D:\lab003\config-center
+          default-label: master
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}

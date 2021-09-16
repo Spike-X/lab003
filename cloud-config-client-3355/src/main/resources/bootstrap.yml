@@ -1,0 +1,22 @@
+server:
+  port: 3355
+
+spring:
+  application:
+    name: config-client
+  cloud:
+    config:
+      label: master #分支名称
+      name: service #配置文件名称
+      profile: prod #读取后缀名称
+      discovery:
+        enabled: true
+        #配置中心服务名
+        service-id: cloud-config-center
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
+  instance:
+    instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
