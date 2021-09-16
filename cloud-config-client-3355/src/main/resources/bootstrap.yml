@@ -7,8 +7,8 @@ spring:
   cloud:
     config:
       label: master #分支名称
-      name: service #配置文件名称
-      profile: prod #读取后缀名称
+      name: config #配置文件名称
+      profile: dev #读取后缀名称
       discovery:
         enabled: true
         #配置中心服务名
@@ -20,3 +20,10 @@ eureka:
       defaultZone: http://localhost:7001/eureka,http://localhost:7002/eureka
   instance:
     instance-id: ${spring.cloud.client.ip-address}:${spring.application.name}:${server.port}
+
+# 暴露监控端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
