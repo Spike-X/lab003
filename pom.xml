@@ -23,6 +23,7 @@
         <module>cloud-consumer-feign-order80</module>
         <module>cloud-config-center-3344</module>
         <module>cloud-config-client-3355</module>
+        <module>cloud-gateway-gateway9527</module>
     </modules>
 
     <properties>
@@ -116,7 +117,6 @@
                 <groupId>org.projectlombok</groupId>
                 <artifactId>lombok</artifactId>
                 <version>${lombok.version}</version>
-                <scope>provided</scope>
             </dependency>
             <dependency>
                 <groupId>com.github.xiaoymin</groupId>
