@@ -4,7 +4,6 @@ import cn.hutool.core.date.DateUtil;
 import com.aircraft.codelab.cache.service.RedisService;
 import com.aircraft.codelab.core.entities.CommonResult;
 import com.aircraft.codelab.core.entities.Payment;
-import com.aircraft.codelab.core.enums.ResultCode;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 import java.time.LocalDateTime;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * 2020-12-29
@@ -71,5 +68,10 @@ public class PaymentController {
         }
         log.debug("payment:{}", payment);
         return CommonResult.success("查询成功,serverPort:  " + serverPort, payment);
+    }
+
+    @GetMapping(value = "/payment/lb")
+    public String getPaymentLb() {
+        return serverPort;
     }
 }
