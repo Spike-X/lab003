@@ -11,7 +11,7 @@ spring:
         git:
           uri: https://gitee.com/spikex/springcloud-config.git
           username: zt_wmail500@163.com
-          password: leyankan4jZT
+          password:
           #搜索目录
           search-paths:
             - lab1
