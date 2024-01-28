@@ -12,6 +12,10 @@
     <artifactId>cloud-consumer-feign-order80</artifactId>
 
     <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
         <!-- maven modules -->
         <dependency>
             <groupId>com.aircraft.codelab</groupId>
