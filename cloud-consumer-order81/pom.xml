@@ -15,8 +15,8 @@
         <dependency>
             <groupId>com.aircraft.codelab</groupId>
             <artifactId>commons-api</artifactId>
+            <version>${project.version}</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-zookeeper-discovery</artifactId>

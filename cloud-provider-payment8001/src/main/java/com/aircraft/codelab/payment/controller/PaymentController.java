@@ -1,6 +1,9 @@
 package com.aircraft.codelab.payment.controller;
 
+import cn.hutool.core.date.DatePattern;
 import cn.hutool.core.date.DateUtil;
+import cn.hutool.core.io.file.FileNameUtil;
+import cn.hutool.core.util.IdUtil;
 import com.aircraft.codelab.cache.service.RedisService;
 import com.aircraft.codelab.core.entities.CommonResult;
 import com.aircraft.codelab.core.entities.Payment;
@@ -14,9 +17,18 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.Resource;
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,5 +134,49 @@ public class PaymentController {
             e.printStackTrace();
         }
         return serverPort;
+    }
+
+    @PostMapping(value = "/payment/feign/multipart", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    public String paymentFeignMultipart(@RequestPart("file") MultipartFile file) throws IOException {
+        Path baseLocation = Paths.get("D:\\home\\ruoyi\\");
+        // 创建文件目录
+        String dateTime = LocalDate.now().format(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN));
+        Path directories = baseLocation.resolve(dateTime);
+        boolean notExists = Files.notExists(directories);
+        if (notExists) {
+            directories = Files.createDirectories(directories);
+        }
+        String originalFilename = file.getOriginalFilename();
+        log.info("originalFilename: {}", originalFilename);
+        // 扩展名
+        String extensionName = FileNameUtil.extName(originalFilename);
+        String fileName = IdUtil.simpleUUID();
+        String newFileName = StringUtils.isBlank(extensionName) ? fileName : fileName + "." + extensionName;
+        Path targetLocation = directories.resolve(newFileName).normalize();
+        // 写文件
+        Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        return "success";
+    }
+
+    @PostMapping(value = "/payment/feign/multipart2")
+    public String paymentFeignMultipart2(@RequestPart("file") MultipartFile file, @RequestParam("param") String param) throws IOException {
+        log.info("param: {}", param);
+        Path baseLocation = Paths.get("D:\\home\\ruoyi\\");
+        // 创建文件目录
+        String dateTime = LocalDate.now().format(DateTimeFormatter.ofPattern(DatePattern.NORM_DATE_PATTERN));
+        Path directories = baseLocation.resolve(dateTime);
+        boolean notExists = Files.notExists(directories);
+        if (notExists) {
+            directories = Files.createDirectories(directories);
+        }
+        String originalFilename = file.getOriginalFilename();
+        // 扩展名
+        String extensionName = FileNameUtil.extName(originalFilename);
+        String fileName = IdUtil.simpleUUID();
+        String newFileName = StringUtils.isBlank(extensionName) ? fileName : fileName + "." + extensionName;
+        Path targetLocation = directories.resolve(newFileName).normalize();
+        // 写文件
+        Files.copy(file.getInputStream(), targetLocation, StandardCopyOption.REPLACE_EXISTING);
+        return "success";
     }
 }
